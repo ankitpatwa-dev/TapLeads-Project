@@ -1,0 +1,37 @@
+
+
+<html>
+   <head>
+   <link rel="stylesheet" href="static/css/login.css">
+   
+   </head>
+   <body>
+   {% block content %}
+   {% if form.errors %}
+   <p class="text-warning"> Your username and/or password didn't match </p>
+   {% endif%}
+   
+   <div class="card">
+      <form action="" method='POST'>
+         {% csrf_token %}
+         <h2 class="title"> Log in</h2>
+         <p class="subtitle">Don't have an account? <a href="registration"> Sign Up</a></p>
+   
+   
+         <div class="email-login">
+            <label for="email"> <b>Username</b></label>
+            {{ form.username }}
+            <label for="psw"><b>Password</b></label>
+            {{ form.password }}
+         </div>
+         {{ form.errors }}
+         {% for message in messages %}
+            <p> {{ message }} </p>
+         {% endfor %}
+         <button class="cta-btn" type="submit">Log In</button>
+         <a class="forget-pass" href="#">Forgot password?</a>
+      </form>
+   </div>
+   {% endblock %}
+   </body>
+   </html>

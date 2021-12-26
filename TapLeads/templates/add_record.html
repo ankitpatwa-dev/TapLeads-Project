@@ -1,0 +1,227 @@
+
+<html>
+<head>
+    <link rel="stylesheet" href="static/css/dashboard.css">
+<link rel="stylesheet" href="static/css/add_record.css">
+</head>
+<body>
+  <input type="checkbox" id="nav-toggle">
+  <div class="sidebar">
+      <div class="sidebar-brand">
+        <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
+        </h1>
+      </div>
+
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a href="/dashboard_redirect" >
+              <span class="fas fa-tachometer-alt"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="logout">
+              <span class="fas fa-tasks"></span>
+              <span>Logout</span>
+            </a>
+          </li>
+      </ul>
+      </div>
+  </div>
+  <main>
+  <div class="main-content">
+      <header>
+          <h2>
+              <label for="nav-toggle">
+              <span class="fas fa-bars">=</span>
+              </label>
+              Dashboard
+          </h2>
+
+      <div class="user-wrapper">
+          <div class="">
+              <h4>{{ request.user }}</h4>
+          </div>
+      </div>
+      </header>
+      <div class="projects">
+          <div class="card">
+              <div class="card-header">
+  <form action="" method='POST'>
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header" bg-primary>
+        <h4>Add Contact Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="input-group input-group-icon">
+          <input name="full_name" type="text" placeholder="Full Name"/>
+          <div class="input-icon"><i class="fa fa-user"></i>
+          </div></div>
+          <div class="input-group input-group-icon">
+          <input name="first_name" type="text" placeholder="First Name"/>
+          <div class="input-icon"><i class="fa fa-user"></i></div></div>
+          <div class="input-group input-group-icon">
+          <input name="middle_name" type="text" placeholder="Middle Name"/>
+          <div class="input-icon"><i class="fa fa-user"></i></div></div>
+          <div class="input-group input-group-icon">
+          <input name="last_name" type="text" placeholder="Last Name"/>
+          <div class="input-icon"><i class="fa fa-user"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="company" type="text" placeholder="Company Name"/>
+          <div class="input-icon"><i class="fa fa-envelope"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="designation" type="text" placeholder="Designation"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="emailid_primary" type="email" placeholder="Primary Email id"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="emailid_secondary" type="email" placeholder="Secondary Email id"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="aadhar" type="Number" placeholder="Aadhar number"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="pan_card" type="Number" placeholder="Pan Number"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="phone" type="Number" placeholder="Phone number"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="current_location" type="text" placeholder="Current Location"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="preferred_location" type="text" placeholder="Preferred Location"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="title" type="text" placeholder="Title"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="department" type="text" placeholder="Department"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="university" type="text" placeholder="University"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="degree" type="text" placeholder="Degree"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="passing_year" type="text" placeholder="Year of graduation"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="college" type="text" placeholder="College"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="linkedin" type="url" placeholder="LinkedIN link"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="facebook" type="url" placeholder="Facebook link"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="instagram" type="url" placeholder="Instagram link"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="industry" type="text" placeholder="Industry"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="country" type="text" placeholder="Country"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="state" type="text" placeholder="State"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="pin_code" type="text" placeholder="PIN code"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="Key_Skills" type="text" placeholder="Key Skills"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="total_experience" type="number" placeholder="Total Experience"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="years_in_business" type="number" placeholder="Years in Business"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="cin_no" type="number" placeholder="CIN No"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="turnover" type="number" placeholder="Turnover"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name = "date_of_incorporation" placeholder="Date of incorporation" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="employees" type="text" placeholder="Employees"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="ctc" type="text" placeholder="CTC"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="notes" type="text" placeholder="Notes"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input name="remarks" type="text" placeholder="Remarks"/>
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+      </div>
+      <div class="row">
+          <h4>Gender</h4>
+          <div class="input-group">
+            <input id="gender-male" type="radio" name="gender" value="male"/>
+            <label for="gender-male">Male</label>
+            <input id="gender-female" type="radio" name="gender" value="female"/>
+            <label for="gender-female">Female</label>
+            <input id="gender-female" type="radio" name="gender" value="other"/>
+            <label for="gender-female">Other</label>
+          </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <h4>Terms and Conditions</h4>
+        <div class="input-group">
+          <input id="terms" type="checkbox"/>
+          <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
+        </div>
+      </div>
+        <center><input type='submit' placeholder="Submit"></center>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

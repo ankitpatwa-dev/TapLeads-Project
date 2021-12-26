@@ -1,0 +1,354 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Tapleads | HomePage</title>
+
+        <style>
+
+      /* Container holding the image and the text */
+.img-block {
+  position: relative;
+  text-align: center;
+  color: white;
+
+}
+.foradmin{
+  display:flex;
+  font-size:1.1rem;
+
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width:70rem;
+  height:10rem;
+
+  transform: translate(-50%, -50%);
+
+}
+.bottom-left p{
+
+
+  padding:30px;
+  margin:20px;
+  background-color:	#6495ed;
+
+
+
+}
+.last-block{
+    display:flex;
+}
+.navbutton{
+    display:flex;
+}
+@media only screen and (max-width: 600px){
+  html{
+    font-size:0.8rem;
+
+  }
+  .bottom-left p{
+    position:absolute;
+    width:auto;
+    height:auto;
+    display:none;
+
+  }
+  .foradmin{
+    font-size:0.8rem;
+    width:100%;
+    display:inline-block;
+
+
+  }
+  .foradmin img{
+    width:100%;
+  }
+  .foradmin ul{
+    width:100%;
+  }
+  .last-block{
+    display:inline-block;
+    padding:10px;
+    margin:0px;
+}
+.navbutton{
+    display:inline;
+}
+.navbutton button{
+    font-size:auto;
+    padding:6px;
+    margin:5px;
+    display:inline-block;
+}
+
+}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TapLeads</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+
+            </li>
+
+
+
+              </ul>
+
+
+          <form class="navbutton">
+
+             <button class="btn btn-outline-success mx-2" type="submit">Find users </button>
+             <button class="btn btn-outline-success mx-2" type="submit">Be an admin</button>
+             <button class="btn btn-outline-success mx-2" type="submit"><a href="./Ourteams" style=" link-style:none; text-decoration:none;">Our Teams</a></button>
+            <button class="btn btn-outline-success mx-2" type="submit"><a href="login" style=" link-style:none; text-decoration:none;">Login</a> </button>
+            <button class="btn btn-outline-success mx-2" type="submit"><a href="registration " style=" link-style:none; text-decoration:none;">Registration</a></button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class='last-block'>
+      <section class="container my-5">
+        <h1 style="font-size:3.5rem;">Struggling to find
+          an ideal prospect for
+          your project?</h1>
+          <p style="font-size:1.5rem;">Not anymore! TapLeads is the one-stop solution to your problem.
+            TapLeads is an online platform that provides all the necessary
+            information about the proficient service providers who will help you as
+            an ideal prospect for your project or endeavor. </p>
+            <button class="btn btn-outline-success mx-2" type="submit">Get Started</button>
+      </section>
+
+      <section class="container">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'images/image_2021-12-16_23-52-17.png' %}" class="d-block w-100" alt="...">
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+
+    </div>
+
+
+      <div class="container-fuild">
+
+          <div class="img-block container-fuild">
+            <img src="{% static 'images/image_2021-12-16_23-47-11.png' %}" alt="Notebook" style="width:100%;">
+
+
+            <div class="top-left"><h1 style="font-size:3.5rem;">For Finding User</h1>
+            <p style="font-size:1.1rem; padding:10px;"> Get in touch with the right user for your<br> work from around the world. </p></div>
+
+            <div class="bottom-left">
+              <section class="d-flex">
+              <p >Get through the list of highly
+              skilled professionals who are
+              specialized in their respective
+              fields.</p>
+
+              <p >Sort out the ideal prospect for
+                your work with easy search
+                options and score value.</p>
+
+
+                <p >Join the hands with the best
+                  professionals from the list who
+                  have a high score value.</p>
+
+            </section>
+            </div>
+
+
+          </div>
+
+      </div>
+
+
+     <div class='foradmin'>
+        <img src="{% static 'images/image_2021-12-16_23-46-59.png' %}" alt="Notebook" >
+        <div class="form" style="background-color:#ff4c11;  color:white; ">
+          <br>
+          <center><h1>For Admin</h1><center>
+            <center><p style="text-align: center; padding:10px;  ">Get connected with the users with whom
+              you re excited to work and rocket fuel
+              your career or business to the next level</p></center>
+
+            <ul style="text-align: center; padding:20px; ">
+              <li>Create your account and show your flair to the
+                people who are looking for it worldwide.</li><br>
+                <li>Have a personalized conversation with the
+                  interested users.</li><br>
+
+                  <li>Join hands with your ideal user and boost
+                    yourself to start working with them. It s that
+                    simple!</li>
+            </ul>
+
+        </div>
+      </div>
+
+
+       <div>
+        <div class="card-group my-5">
+          <div class="card mx-3">
+            <img src="{% static 'images/image_2021-12-16_23-50-43.png' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">An extensive pool of adept
+                businesses/ service providers
+                will help you with the work
+                you're looking for. </h5>
+
+            </div>
+          </div>
+          <div class="card mx-3">
+            <img src="{% static 'images/image_2021-12-16_23-51-15.png' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Easy search option based on
+                your criteria to find an ideal
+                prospect for your project or
+                endeavor.</h5>
+
+            </div>
+          </div>
+          <div class="card mx-3">
+            <img src="{% static 'images/image_2021-12-16_23-47-21.png' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Get a score for each record
+                which will help you in
+                choosing the most reliable
+                prospect</h5>
+
+            </div>
+          </div>
+        </div>
+       </div>
+
+
+
+
+       <div class='last-block'>
+        <section class="container  my-5">
+          <h1 style="font-size:3.5rem; border-bottom: 2px solid blue;">Want More?</h1><br>
+            <p style="font-size:1.1rem;">We are delighted to know that you liked our platform very much. However, we are sorry that
+              we could not provide you access to all TapLead's features. Hey, the good news is here! You
+              can now get unlimited access to our platform by becoming a member today, and it will
+              definitely make your experience much better than now!</p>
+
+              <h4>Parks:</h4>
+              <ul >
+                <li><img src="{% static 'images/image_2021-12-16_23-48-27.png' %}" style="width:40px; margin:10px;">Get access to all the records of the professional users.</li>
+                <li><img src="{% static 'images/image_2021-12-16_23-48-27.png' %}" style="width:40px; margin:10px;">Unlock the contact details for each record as per their allowable limits.</li>
+                <li><img src="{% static 'images/image_2021-12-16_23-48-27.png' %}" style="width:40px; margin:10px;">Export contact details in csv, xlx, text.</li>
+                <li><img src="{% static 'images/image_2021-12-16_23-48-27.png' %}" style="width:40px; margin:10px;">Save your previous searches and lots more.</li>
+
+              </ul>
+              <div class="d-flex">
+              <h3>What are you waiting for?</h3><button class="btn btn-outline-success mx-2" type="submit">Become a Member</button>
+              </div>
+            </section>
+
+        <section class="container">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/image_2021-12-16_23-49-52.png' %}" class="d-block w-100 last-img" alt="...">
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      <div class="container-fild" style="background-color:black; color:white;"><br>
+        <center><h1>Take the First Step Now!</h1>
+          <center><p style="width:50%">Yesss! We understand that taking the first step is always difficult. But, it
+            has to always start from zero to move forward in life. TapLeads is always
+            there to assist you, from listing your credentials to finding the right choice
+            for your required work.</p> <button class="btn btn-outline-success mx-2" type="submit">Get Started</button><center>
+              <br>
+      </div>
+
+
+      <section class="container-fild" style="background-color:grey; color:white; height:auto; padding:10px;"><br>
+
+         <h1 class="mx-5">Tapleads</h1>
+         <div class="d-flex" style="float:right; padding:10px;">
+
+
+        </div>
+
+        <center><p> Mail: @TapLeads@gmail.com</p> <p> Phone:125544646946</p><center>
+         <center><p>© 2021 All Rights Reserved. TapLeads </p><center>
+
+
+
+         </section>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<!--<link rel="stylesheet" href="static/css/reg.css">-->
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+<body>
+{% block content %} 
+<div class="container">
+<br>  
+<hr>
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Account</h4>
+	<p class="text-center">Get started with your free account</p>
+	<form action="" method='POST'>
+		{% csrf_token %}
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 	</div>
+        	{{ form.name }}
+    	</div> <!-- form-group// -->
+    	<div class="form-group input-group">
+    		<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 	</div>
+        	{{ form.email }}
+    	</div> <!-- form-group// -->
+    	<div class="form-group input-group">
+    		<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+			</div>
+			{{ form.phone_number }}
+    	</div> <!-- form-group// -->
+    	<div class="form-group input-group">
+    		<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+			</div>
+        	{{ form.username }}
+    	</div> <!-- form-group// -->
+    	<div class="form-group input-group">
+    		<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+        	{{ form.password1 }}
+    	</div> <!-- form-group// -->        
+
+    	<div class="form-group input-group">
+    		<div class="input-group-prepend">
+		    	<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+        	{{ form.password2 }}
+			{{ form.errors}}
+    	</div>
+ 		 <!-- form-group// -->                               
+    	<div class="form-group">
+        	<button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+    	</div> <!-- form-group// -->     
+    	<p class="text-center">Have an account? <a href="/login">Log In</a> </p>                                                                
+	</form>
+	</article>
+</div>
+
+</div> 
+<br><br>
+
+{% endblock %}
+
+<script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/css/dashboard.css">
+
+    </head>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+              <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
+              </h1>
+            </div>
+
+            <div class="sidebar-menu">
+              <ul>
+                <li>
+                  <a href="/dashboard_redirect" >
+                    <span class="fas fa-tachometer-alt"></span>
+                    <span>Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="dashboard_redirect/view">
+                    <span class="fas fa-users" ></span>
+                    <span>View Contacts</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="logout">
+                    <span class="fas fa-tasks"></span>
+                    <span>Logout</span>
+                  </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <main>
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                    <span class="fas fa-bars">=</span>
+                    </label>
+                    Scoring
+                </h2>
+
+                <div class="user-wrapper">
+                    <div class="">
+                        <h4>{{ request.user }}</h4>
+                    </div>
+                </div>
+            </header>
+            <div class="projects">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Available methods</h4>
+                    </div>
+                    <br>
+                    <div class="card-body"><center>
+                        <form action="/set_score/select" method='POST'>
+                            {% csrf_token %}
+                            <div class="input-group input-group-icon">
+                                <label for="method">Choose a Scoring Type:</label>
+                                    <select name="method" id="method">
+                                    </select>
+                                </label>
+                            </div>
+                            <br>
+                            <center><input type='submit' placeholder="Submit" class="fas fa-arrow-right"> </center>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </center>
+            </div>
+            <br>
+            <center><h4>Or..</h4></center>
+            <br>
+            <div class="projects"><center>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Create a new scoring method</h4>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                        <form action="" id="new-method-form" method='POST'>
+                            {% csrf_token %}
+                            <div class="input-group input-group-icon">
+                                <label for="name">Method Name:</label>
+                                    <input type="text" name="name" />
+                                </label>
+                                <br><br>
+                                <label for="fields">Fields</label>
+                                    <div id="fields"></div>
+                                        <button type="button" onclick="addField()">Add new field</button>
+                                    </div>
+                                </label>
+                            </div>
+                        </form>
+                        <br><br>
+
+                        <div id="total">Please make sure the total weightage adds up to 100</div>
+                        <center><button type='button' onclick="onSubmit()" class="fas fa-arrow-right">Submit</button></center>
+                    </div>
+                </div></center>
+            </div>
+            <br><br>
+            <div class="projects2"><center>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Available methods' details</h4>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                    </div>
+                </div></center>
+            </div>
+        </div>
+        </main>
+        <script type="text/javascript">
+            const fields = {
+                "full_name": "Full Name",
+                "first_name": "First Name",
+                "middle_name": "Middle Name",
+                "last_name": "Last Name",
+                "company": "Company",
+                "designation": "Designation",
+                "emailid_primary": "Primary Email Id",
+                "emailid_secondary": "Secondary Email Id",
+                "aadhar": "Aadhar Card",
+                "pan_card": "Pan Card",
+                "phone": "Phone",
+                "current_location": "Current Location",
+                "preferred_location": "Preferred Location",
+                "gender": "Gender",
+                "title": "Title",
+                "department": "Department",
+                "university": "University",
+                "degree": "Degree",
+                "passing_year": "Passing Year",
+                "college": "College",
+                "linkedin": "Linkedin URL",
+                "facebook": "Facebook URL",
+                "instagram": "Instagram ID",
+                "industry": "Industry",
+                "country": "Country",
+                "state": "State",
+                "pin_code": "Pin Code",
+                "key_skills": "Key Skills",
+                "total_experience": "Total Exp",
+                "years_in_business": "Years in Business",
+                "cin_no": "CIN No",
+                "turnover": "Turnover",
+                "date_of_incorporation": "Date of Incorporation",
+                "employees": "Employees",
+                "ctc": "CTC",
+                "notes": "Notes",
+                "remarks": "Remarks",
+            }
+            const selectedMethod = "{{current_method.id|safe}}"
+            const existingMethods  = {{ methods|safe }};
+            const appendMethod = (method, dropdown) => {
+                const newOption = document.createElement('option');
+                const optionText = document.createTextNode(method.fields.name);
+                newOption.appendChild(optionText);
+                if(method.pk == selectedMethod) newOption.setAttribute('selected', true)
+                newOption.setAttribute('value', method.pk);
+                dropdown.appendChild(newOption);
+            }
+            const existingMethodDropdown = document.getElementById("method")
+            existingMethods.forEach((method) => {
+                appendMethod(method, existingMethodDropdown);
+            })
+            const fieldDiv = document.getElementById("fields")
+            const fieldDropdown = document.createElement('select')
+            Object.entries(fields).forEach(([field, value]) => {
+                const newOption = document.createElement('option');
+                const optionText = document.createTextNode(value);
+                newOption.appendChild(optionText);
+                newOption.setAttribute('value', field);
+                fieldDropdown.appendChild(newOption);
+            })
+            function parseInputs(data) {
+                var ret = {};
+            retloop:
+                for (var input in data) {
+                    var val = data[input];
+
+                    var parts = input.split('[');
+                    var last = ret;
+
+                    for (var i in parts) {
+                        var part = parts[i];
+                        if (part.substr(-1) == ']') {
+                            part = part.substr(0, part.length - 1);
+                        }
+
+                        if (i == parts.length - 1) {
+                            last[part] = val;
+                            continue retloop;
+                        } else if (!last.hasOwnProperty(part)) {
+                            last[part] = {};
+                        }
+                        last = last[part];
+                    }
+                }
+                return ret;
+            }
+            let fieldIndex = 0
+            let weightages = {}
+            const totalDiv = document.getElementById('total')
+            const updateTotalWeightages = () => {
+                const total = Object.values(weightages)
+                    .filter(a => !Number.isNaN(a))
+                    .reduce((a, c) => a + c, 0)
+                totalDiv.innerHTML = total
+            }
+            const addField = () => {
+                const newField = document.createElement('div');
+
+                const newFieldDropdown = fieldDropdown.cloneNode(true);
+                newFieldDropdown.setAttribute('name',  `fields[${fieldIndex}][field]`)
+
+                const weightageInput = document.createElement('input');
+                weightageInput.setAttribute('name', `fields[${fieldIndex}][weightage]`);
+                weightageInput.setAttribute('type', 'number');
+
+                const updater = (function() {
+                    const index = fieldIndex
+                    return function(event) {
+                        const value = parseInt(event.target.value)
+                        weightages[index] = value
+                        updateTotalWeightages()
+                    }
+                })();
+
+                weightageInput.onkeyup = updater
+                weightageInput.onchange = updater
+
+                newField.append(newFieldDropdown)
+                newField.append(weightageInput);
+                fieldDiv.append(newField);
+                fieldIndex += 1;
+            }
+
+            function getFormData(object) {
+                const formData = new FormData();
+                Object.keys(object).forEach(key => formData.append(key, object[key]));
+                return formData;
+            }
+
+            const onSubmit = () => {
+                let formData = new FormData(document.getElementById("new-method-form"))
+                formData = Object.fromEntries(formData)
+                const body = parseInputs(formData)
+                fetch('', {
+                    method: 'post',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                }).then(() => {
+                    window.location.reload()
+                })
+            }
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,481 @@
+<html>
+<head>
+<!--<link rel="stylesheet" href="static/css/import.css">-->
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<title>Tapleads Contacts</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+	section{
+		background-color:#ffe4c4;
+	}
+	.container{
+
+		overflow-x:scroll;
+		overflow-y:scroll;
+
+	}
+	#history{
+		background-color:#FAEBD7;
+		width:40%;
+		padding:0px 10px 0px;
+	}
+	#input{
+		font-weight:bold;
+
+	}
+	#head{
+		position:static;
+	}
+	#filter,input{
+		margin:5px;
+	}
+
+	#showfilter{
+		display:none;
+	}
+
+</style>
+</head>
+<body>
+
+
+	<div class="show">
+		<div class="head">
+		<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+			<div class="container" style="font-weight:100px">
+				<a class="navbar-brand" href="#" >
+					<b><h1>TapLeads Contacts</h1></b>
+				</a>
+			</div>
+		</nav>
+
+		<main class="py-14 py-100% show">
+
+			<div class="container">
+
+				<div class="row justify-content-center">
+					<div class="col-md-12">
+					<div class="card">
+						<div class=" btn btn-dark">
+							Contacts
+						</div>
+						<div class="mx-5 my-5">
+						<a href="Export" class="btn btn-primary" >Export Contact</a>
+						<a href = "/dashboard_redirect" class ="btn btn-primary">Back to Dashboard</a>
+						</div>
+						<div class="container">
+
+							<h1 class="text-center" style="padding: 2rem;">Search Contacts Here</h1>
+
+							<nav class="navbar navbar-light bg-light justify-content-center">
+
+							  <form class="form-inline" id="form" >
+
+								<input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search" oninput="myFunction()">
+
+								<button class="btn btn-outline-success my-2 my-sm-0"  type="submit" id="submit"><i class="fas fa-search">save search</i></button>
+							  </form>
+
+							</nav>
+							<button type="button" id="delete" class="btn btn-outline-danger" style="display: block;margin: 1rem auto;">Delete Searches</button>
+
+
+							<h2 style="font-size: 20px; padding: 1rem;">Recent Searches</h2>
+
+							<ul class="list-group list-group-flush" id="ul">
+
+							</ul>
+
+						  </div>
+						  <div class="container">
+						<button onclick="showfilter()" class="btn btn-primary">show filter</button>
+						<button onclick="closefilter()" class="btn btn-dark">close filter</button>
+						</div>
+						<div class="card-body" id='showfilter'>
+
+							<div style="margin-bottom: 20px; padding:10px;" class="filter" >
+	                            <p>Filter Data From Here</p>
+								<input type="hidden" id="filter0" placeholder="Filter By full name" >
+								<input type="text" id="filter1" placeholder="Filter By first name">
+								<input type="text" id="filter2" placeholder="Filter By middle name">
+								<input type="text" id="filter3" placeholder="Filter By lastname">
+								<input type="text" id="filter4" placeholder="Filter By company">
+                                <input type="text" id="filter5" placeholder="Filter By designation">
+								<input type="hidden" id="filter6" placeholder="Filter By emailid_primary">
+								<input type="hidden" id="filter7" placeholder="Filter By emailid_secondary">
+								<input type="hidden" id="filter8" placeholder="Filter By aadhar">
+								<input type="hidden" id="filter9" placeholder="Filter By pan_card">
+								<input type="hidden" id="filter10" placeholder="Filter By phone">
+								<input type="text" id="filter11" placeholder="Filter By current_location">
+								<input type="text" id="filter12" placeholder="Filter By preferred_location">
+								<input type="text" id="filter13" placeholder="Filter By gender">
+								<input type="text" id="filter14" placeholder="Filter By title">
+								<input type="text" id="filter15" placeholder="Filter By department">
+								<input type="text" id="filter16" placeholder="Filter By university">
+								<input type="text" id="filter17" placeholder="Filter By degree">
+								<input type="text" id="filter18" placeholder="Filter By passing_year">
+								<input type="text" id="filter19" placeholder="Filter By college">
+								<input type="hidden" id="filter20" placeholder="Filter By linkedin">
+								<input type="hidden" id="filter21" placeholder="Filter By facebook">
+								<input type="hidden" id="filter22" placeholder="Filter By instagram">
+								<input type="text" id="filter23" placeholder="Filter By industry">
+								<input type="text" id="filter24" placeholder="Filter By country">
+								<input type="text" id="filter25" placeholder="Filter By pin_code">
+								<input type="text" id="filter26" placeholder="Filter By Key Skills">
+								<input type="text" id="filter27" placeholder="Filter By Total experience">
+								<input type="text" id="filter28" placeholder="Filter By years_in_business">
+								<input type="text" id="filter29" placeholder="Filter By CIN no">
+	                            <input type="text" id="filter30" placeholder="Filter By turnover">
+								<input type="text" id="filter31" placeholder="Filter By date_of_incorporation">
+								<input type="text" id="filter32" placeholder="Filter By employees">
+								<input type="text" id="filter33" placeholder="Filter By ctc">
+							</div>
+
+
+						</div>
+						<div class="container">
+
+							<table id="filter" class="table">
+								{% if sub_type == 'free' %}
+		<thead>
+			<tr>
+				<th>full_name</th>
+				<th>first_name</th>
+				<th>middle_name</th>
+				<th>last_name</th>
+				<th>company</th>
+				<th>designation</th>
+				<th>emailid_primary</th>
+				<th>emailid_secondary</th>
+				<th>aadhar</th>
+				<th>pan_card</th>
+				<th>phone</th>
+				<th>current_location</th>
+				<th>preferred_location</th>
+				<th>gender</th>
+				<th>title</th>
+				<th>department</th>
+				<th>university</th>
+				<th>degree</th>
+				<th>passing_year</th>
+				<th>college</th>
+				<th>linkedin</th>
+				<th>facebook</th>
+				<th>instagram</th>
+				<th>industry</th>
+				<th>country</th>
+				<th>pin_code</th>
+				<th>key_skills</th>
+				<th>total_experience</th>
+				<th>years_in_business</th>
+				<th>cin_no</th>
+				<th>turnover</th>
+				<th>date_of_incorporation</th>
+				<th>employees</th>
+				<th>ctc</th>
+				<th>notes</th>
+				<th>remarks</th>
+				<th>score</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		{% for contact in contacts %}
+		<tbody>
+			<tr>
+				<td>{{contact.contact.full_name}}</td>
+				<td>{{contact.contact.first_name}}</td>
+				<td>{{contact.contact.middle_name}}</td>
+				<td>{{contact.contact.last_name}}</td>
+				<td>{{contact.contact.company}}</td>
+				<td>{{contact.contact.designation}}</td>
+				<td>sorry you can't see</td>
+				<td>{{contact.contact.aadhar}}</td>
+				<td>{{contact.contact.pan_card}}</td>
+                <td>sorry you can't see</td>
+				<td>{{contact.contact.current_location}}</td>
+				<td>{{contact.contact.preferred_location}}</td>
+				<td>{{contact.contact.gender}}</td>
+				<td>{{contact.contact.title}}</td>
+				<td>{{contact.contact.department}}</td>
+				<td>{{contact.contact.university}}</td>
+				<td>{{contact.contact.passing_year}}</td>
+				<td>{{contact.contact.college}}</td>
+				<td>{{contact.contact.linkedin}}</td>
+				<td>{{contact.contact.facebook}}</td>
+				<td>{{contact.contact.instagram}}</td>
+
+				<td>{{contact.contact.industry}}</td>
+				<td>{{contact.contact.country}}</td>
+				<td>{{contact.contact.state}}</td>
+				<td>{{contact.contact.pin_code}}</td>
+				<td>{{contact.contact.key_skills}}</td>
+
+				<td>{{contact.contact.total_experience}}</td>
+				<td>{{contact.contact.years_in_business}}</td>
+				<td>{{contact.contact.cin_no}}</td>
+				<td>{{contact.contact.turnover}}</td>
+				<td>{{contact.contact.date_of_incorporation}}</td>
+
+				<td>{{contact.contact.employees}}</td>
+				<td>{{contact.contact.ctc}}</td>
+				<td>{{contact.contact.notes}}</td>
+				<td>{{contact.contact.remarks}}</td>
+				<td>{{contact.score}}</td>
+
+				<td><a href="#" class="btn btn-primary" onclick='paid()'>paid</a></td>
+			</tr>
+
+
+		</tbody>
+		{% endfor %}
+
+
+		{% elif sub_type == 'paid' or sub_type == 'Admin' or sub_type == 'SuperUser' %}
+		<thead>
+			<tr>
+				<th>full_name</th>
+				<th>first_name</th>
+				<th>middle_name</th>
+				<th>last_name</th>
+				<th>company</th>
+				<th>designation</th>
+				<th>emailid_primary</th>
+				<th>emailid_secondary</th>
+				<th>aadhar</th>
+				<th>pan_card</th>
+				<th>phone</th>
+				<th>current_location</th>
+				<th>preferred_location</th>
+				<th>gender</th>
+				<th>title</th>
+				<th>department</th>
+				<th>university</th>
+				<th>degree</th>
+				<th>passing_year</th>
+				<th>college</th>
+				<th>linkedin</th>
+				<th>facebook</th>
+				<th>instagram</th>
+				<th>industry</th>
+				<th>country</th>
+				<th>pin_code</th>
+				<th>key_skills</th>
+				<th>total_experience</th>
+				<th>years_in_business</th>
+				<th>cin_no</th>
+				<th>turnover</th>
+				<th>date_of_incorporation</th>
+				<th>employees</th>
+				<th>ctc</th>
+				<th>notes</th>
+				<th>remarks</th>
+				<th>score</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		{% for contact in contacts %}
+		<tbody>
+			<tr>
+				<td>{{contact.contact.full_name}}</td>
+				<td>{{contact.contact.first_name}}</td>
+				<td>{{contact.contact.middle_name}}</td>
+				<td>{{contact.contact.last_name}}</td>
+				<td>{{contact.contact.company}}</td>
+				<td>{{contact.contact.designation}}</td>
+				<td>{{contact.contact.emailid_primary}}</td>
+				<td>{{contact.contact.emailid_secondary}}</td>
+				<td>{{contact.contact.aadhar}}</td>
+				<td>{{contact.contact.pan_card}}</td>
+				<td>{{contact.contact.phone}}</td>
+
+				<td>{{contact.contact.current_location}}</td>
+				<td>{{contact.contact.preferred_location}}</td>
+				<td>{{contact.contact.gender}}</td>
+				<td>{{contact.contact.title}}</td>
+				<td>{{contact.contact.department}}</td>
+				<td>{{contact.contact.university}}</td>
+				<td>{{contact.contact.passing_year}}</td>
+				<td>{{contact.contact.college}}</td>
+				<td>{{contact.contact.linkedin}}</td>
+				<td>{{contact.contact.facebook}}</td>
+				<td>{{contact.contact.instagram}}</td>
+
+				<td>{{contact.contact.industry}}</td>
+				<td>{{contact.contact.country}}</td>
+				<td>{{contact.contact.state}}</td>
+				<td>{{contact.contact.pin_code}}</td>
+				<td>{{contact.contact.key_skills}}</td>
+
+				<td>{{contact.contact.total_experience}}</td>
+				<td>{{contact.contact.years_in_business}}</td>
+				<td>{{contact.contact.cin_no}}</td>
+				<td>{{contact.contact.turnover}}</td>
+				<td>{{contact.contact.date_of_incorporation}}</td>
+
+				<td>{{contact.contact.employees}}</td>
+				<td>{{contact.contact.ctc}}</td>
+				<td>{{contact.contact.notes}}</td>
+
+				<td>{{contact.contact.remarks}}</td>
+				<td>{{contact.score}}</td>
+				{% if contact.is_viewed %}
+					<td><button type="button" class="btn btn-primary btn-disabled" disabled>Viewed</button></td>
+				{% else %}
+					<td><a href="view/viewed/{{contact.contact.id}}" class="btn btn-primary">View</a></td>
+				{% endif %}
+
+			</tr>
+
+
+		</tbody>
+		{% endfor %}
+		{% endif %}
+		</table>
+
+						</div>
+					</div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</main>
+	</div>
+
+
+		<!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+
+
+
+
+<script>
+
+
+
+/*paid function*/
+function paid()
+{
+swal("Oops!", "You want to upgrade your subscription!", "error");
+}
+
+function s(){
+		var val=document.getElementById("history").innerHTML;
+		let input=document.getElementById("input").value=val;
+
+	}
+
+	const oTableFilter=function(){var e,t=document.getElementsByTagName("table"),n=[];for(let g=0;g<t.length;g++){n[g]=document.getElementById(t[g].id),n[g].tr=n[g].getElementsByTagName("tr"),n[g].tr.length>1&&(n[g].td=n[g].tr[1].getElementsByTagName("td"));for(let t=0;t<n[g].td.length;t++)e=document.getElementById(n[g].id+t.toString()),n[g].input=[],null!=e&&(n[g].input[t]=document.getElementById(n[g].id+t.toString()),n[g].input[t].addEventListener("keyup",function(){l(n[g].id)}))}function l(e){var t,n,l,g,d=[],m=[],o=[],a=[],r=!0;for(g=e,(t=document.getElementById(e).getElementsByTagName("tr")).length>1&&(l=(d=t[1].getElementsByTagName("td")).length),n=0;n<l;n++)null!=document.getElementById(g+n.toString())?(m[n]=document.getElementById(g+n.toString()),o[n]=m[n].value.toUpperCase()):l=n;for(n=1;n<t.length;n++){for(r=!0,j=0;j<l;j++)a=(d=t[n].getElementsByTagName("td")[j]).textContent||d.innerText,""!=o[j]&&a.toUpperCase().indexOf(o[j])<=-1&&(r=!1);t[n].style.display=r?"":"none"}}}();
+function showfilter()
+{
+
+	document.getElementById("showfilter").style.display='inline';
+
+}
+function closefilter()
+{
+
+	document.getElementById("showfilter").style.display='none';
+
+}
+/*Serching*/
+function myFunction() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("search");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("filter");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+	  td = tr[i].getElementsByTagName("td")[0];
+	  if (td) {
+		txtValue = td.textContent || td.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		  tr[i].style.display = "";
+		} else {
+		  tr[i].style.display = "none";
+		}
+	  }
+	}
+  }
+
+/* Save search*/
+const form = document.getElementById("form");
+const searchBar = document.getElementById("search");
+const submitButton = document.getElementById("submit");
+const deleteButton = document.getElementById("delete");
+const ul = document.getElementById("ul");
+let recentSearches;
+
+if (localStorage.recentSearches && localStorage.recentSearches != "") {
+  recentSearches = JSON.parse(localStorage.recentSearches);
+} else {
+  recentSearches = [];
+}
+
+const makeListItem = (text, parent) => {
+  let listItem = document.createElement("li");
+  listItem.textContent = text;
+  listItem.className = "list-group-item";
+  parent.appendChild(listItem);
+};
+
+recentSearches.forEach(element => {
+  makeListItem(element, ul);
+});
+
+const isDuplicateValue = (arr, text) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == text) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  if (
+    searchBar.value == "" ||
+    isDuplicateValue(recentSearches, searchBar.value)
+  ) {
+    return;
+  } else {
+    recentSearches.push(searchBar.value);
+    makeListItem(searchBar.value, ul);
+    localStorage.recentSearches = JSON.stringify(recentSearches);
+    searchBar.value = "";
+  }
+});
+
+deleteButton.addEventListener("click", () => {
+  localStorage.clear();
+  recentSearches = [];
+  searchBar.value = "";
+  // I use querySelectorAll because it returns a static collection
+  let arr = document.querySelectorAll("li");
+  // I use the static collection for iteration
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].remove();
+  }
+});
+
+
+</script>
+</body>
+</html>

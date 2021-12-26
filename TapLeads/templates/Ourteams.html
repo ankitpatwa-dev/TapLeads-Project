@@ -1,0 +1,219 @@
+{% load static %}
+<html>
+<head>
+<!-- https://www.youtube.com/watch?v=NuYMMNK4wzA -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+/* https://www.youtube.com/watch?v=NuYMMNK4wzA */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+}
+
+ .div{
+  font-family: 'Poppins', sans-serif;
+  width:90vw;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    padding: 30px;
+
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin:10px;
+}
+
+.card .text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card .text img{
+    height: 170px;
+    border-radius: 50%;
+  margin-bottom:10px;
+}
+
+.card .text h3{
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.card .text p:nth-of-type(1){
+    color: rgb(35, 182, 219);
+    font-size: 15px;
+    margin-top: -5px;
+}
+
+.card .text p:nth-of-type(2){
+    margin: 10px;
+    width: 90%;
+    text-align: center;
+}
+
+.card .links{
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card .links i{
+    color: rgb(35, 182, 219);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.card .links i:hover{
+    color:rgb(29, 157, 189) ;
+}
+@media only screen and (max-width:300px)
+
+{
+
+ .div{
+        font-family: 'Poppins', sans-serif;
+        width:90vw;
+        height:100vh;
+        display:inline-block;
+        justify-content:center;
+        align-items:center;
+        font-size:1rem;
+      }
+      .card {
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        padding: 30px;
+
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        margin:10px;
+      }
+}
+
+
+
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TapLeads</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+
+
+
+              </ul>
+
+
+          <form class="d-flex">
+
+            <button class="btn btn-outline-success mx-2" type="submit">Find users </button>
+            <button class="btn btn-outline-success mx-2" type="submit">Be an admin</button>
+            <button class="btn btn-outline-success mx-2" type="submit"><a href="./Ourteams" style=" link-style:none; text-decoration:none;">Our Teams</a></button>
+            <button class="btn btn-outline-success mx-2" type="submit"><a href="login" style=" link-style:none; text-decoration:none;">Login</a> </button>
+            <button class="btn btn-outline-success mx-2" type="submit"><a href="registration " style=" link-style:none; text-decoration:none;">Registration</a></button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="card1"><br>
+        <center><h1 style="border-bottom:2px solid blue; width:200px;" >Our Teams</h1><center>
+    </div>
+ <!--You can write something here-->
+   <p class="mx-5"></p>
+
+    <div class="div mx-5">
+
+        <div class="card">
+            <div class="text">
+                <img src=" {% static 'images/profile-pic.jpeg' %}" alt="">
+                <h3>Kiran Ingale</h3>
+
+                <p>Student | Developer</p>
+                <p>
+
+                   Hello, I'm Kiran Ingale from pune maharashtra. I am pursuing my Bachelor of Engineering(BE) in Computer Science Engineering from savitribai phule pune university.
+               </p>
+                <p><b>About Work:</b> I have worked on following features:<br> 1. Import Contacts feature<br> 2.View Contacts <br> 3.Filters and searching feature <br> 4.Save Searches feature <br> 5.Delete Save Searches <br> 6.Homepage <br> 7.Our teams page <br> 8. Export Contacts feature <br> 9.add contact manually</p>
+            </div>
+            <div class="links">
+
+                <a target="_blank" href="https://github.com/kiraningale2001"><i class="fab fa-github"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/kiran-ingale-546432207"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+<div class="card">
+
+            <div class="text">
+                <img src="{% static 'images/picture-tejaswi.jpeg' %}" alt="">
+                <h3>Tejaswi Balla</h3>
+                <p>Student | Developer</p>
+                <p>
+                    Hi, I’m Tejaswi from Visakhapatnam. I’m a Computer Science and Engineering student at Godavari Institute of Engineering and Technology, Rajahmundry.
+
+                </p>
+                <p><b>About Work:</b> I have worked on: <br>1. Authentication and Authorization<br>2. Login and Registration<br>Custom dashboard for each user type<br>4. Security<br>5. Limits feature<br>6. Scoring feauture</p>
+            </div>
+            <div class="links">
+                <a target="_blank" href="https://github.com/tezu0406"><i class="fab fa-github"></i></a>
+                <a target="_blank" href="www.linkedin.com/in/tejaswi-balla"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+ </div>
+ <div class="div mx-5">
+       <div class=" card mx-5">
+
+            <div class="text">
+                <img src=" {% static 'images/Img.png' %}" alt="">
+                <h3>Rishabh Jain</h3>
+                <p>Student | Business Analyst</p>
+                <p>
+                    Rishabh resides in Delhi and  is currently pursuing Bachelors of Commerce from Ramanujan College, University of Delhi.
+                </p>
+                <p><b>About Work:</b> Write Something About Your Work</p>
+            </div>
+            <div class="links">
+
+                <a target="_blank" href="https://www.linkedin.com/in/rishabh-jain-0582bb205"><i class="fab fa-linkedin"></i></a>
+
+            </div>
+        </div>
+ </div>
+
+          <div class="container-fuild" style="background-color:grey; color:white; height:auto; "><br>
+
+         <h1 class="mx-5">Tapleads</h1>
+         <div class="d-flex" style="float:right; padding:10px;">
+
+
+        </div>
+
+        <center><p> Mail: @TapLeads@gmail.com</p> <p> Phone:125544646946</p><center>
+         <center><p>© 2021 All Rights Reserved. TapLeads </p><center>
+
+
+
+         </div>
+
+
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
