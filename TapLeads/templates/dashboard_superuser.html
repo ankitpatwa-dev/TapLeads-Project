@@ -1,11 +1,15 @@
-<html>
+
+ {% extends 'base.html' %} 
+ {% block title %} Dashboard {% endblock title %}
+{#
+ <html>
 <head>
 <link rel="stylesheet" href="/static/css/dashboard.css">
 </head>
 <body>
 
 
-    <input type="checkbox" id="nav-toggle">
+    <input type="checkbox" id="nav-toggle"> 
     <div class="sidebar">
         <div class="sidebar-brand">
           <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
@@ -20,10 +24,12 @@
                 <span>Dashboard</span>
               </a>
             </li>
+            
             <li>
               <a href="/dashboard_redirect/importrecord">
                 <span class="fas fa-users" ></span>
                 <span>Import Records</span>
+      
               </a>
             </li>
             <li>
@@ -32,6 +38,7 @@
                 <span>Add Records Manually</span>
               </a>
             </li>
+
             <li>
               <a href="dashboard_redirect/view">
                 <span class="fas fa-users" ></span>
@@ -49,7 +56,6 @@
 
         </div>
     </div>
-
     <div class="main-content">
       <header>
         <h2>
@@ -68,7 +74,9 @@
 
          </div>
         </div>
-      </header>
+      </header> 
+      #}
+    {% block main_content %}
 
       <main>
         <div class="cards">
@@ -113,7 +121,6 @@
         <br>
       </main>
     </div>
+     {% endblock main_content %}
 
 
-</body>
-</html>

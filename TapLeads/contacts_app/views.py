@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render,redirect,HttpResponse
 from contacts_app.decorators import unauthenticated_user
 from django.contrib import messages
@@ -311,9 +312,14 @@ def import_contacts(request):
 def dashboard_free(request):
   user_id=request.session.get('_auth_user_id')
   users=UserData.objects.get(user_id=user_id)
+  # give the user type
+  group = request.user.groups.filter(user=request.user)[0]
+  sub_type=str(group.name)
+
+  print(sub_type)
   return render(request,'dashboard_free.html', {'users':users,
                                                 'username':request.user.username,
-                                                'date_joined':request.user.date_joined
+                                                'date_joined':request.user.date_joined, 'sub_type' : sub_type
                                                 })
 
 
@@ -322,9 +328,12 @@ def dashboard_free(request):
 def dashboard_paid(request):
   user_id=request.session.get('_auth_user_id')
   user_data=UserData.objects.get(user_id=user_id)
+  # give the user type
+  group = request.user.groups.filter(user=request.user)[0]
+  sub_type=str(group.name)
   return render(request,'dashboard_paid.html', {'user_data':user_data,
                                                 'balance': user_data.total_limits - user_data.viewed,
-                                                'date_joined':request.user.date_joined})
+                                                'date_joined':request.user.date_joined,'sub_type' : sub_type})
 
 
 @login_required(login_url="login")
@@ -332,10 +341,13 @@ def dashboard_paid(request):
 def dashboard_admin(request):
   user_id=request.session.get('_auth_user_id')
   user_data=UserData.objects.get(user_id=user_id)
+  # give the user type
+  group = request.user.groups.filter(user=request.user)[0]
+  sub_type=str(group.name)
   return render(request,'dashboard_admin.html', {'user_data':user_data,
                                                  'username':request.user,
                                                  'balance': user_data.total_limits - user_data.viewed,
-                                                 'date_joined':request.user.date_joined,
+                                                 'date_joined':request.user.date_joined,'sub_type' : sub_type
                                                  })
 
 
@@ -346,11 +358,14 @@ def dashboard_superuser(request):
   user_data=UserData.objects.get(user_id=user_id)
   scores=Score.objects.all()
 
-
+   # give the user type
+  group = request.user.groups.filter(user=request.user)[0]
+  sub_type=str(group.name)
   return render(request,'dashboard_superuser.html', {'user_data':user_data,
                                                      'scores':scores,
                                                     'balance': user_data.total_limits - user_data.viewed,
-                                                    'date_joined':request.user.date_joined,})
+                                                    'date_joined':request.user.date_joined,
+                                                    'sub_type' : sub_type})
 
 
 
@@ -374,7 +389,8 @@ def dashboard_redirect(request):
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
 def record_show(request):
-  s_search=SaveSearch.objects.all()[::-5]
+  user_id=request.session.get('_auth_user_id')
+  s_search=SaveSearch.objects.filter(user = user_id)
   group = request.user.groups.filter(user=request.user)[0]
   sub_type=str(group.name)
   viewed=View.objects.filter(user=request.user)
@@ -395,20 +411,48 @@ def record_show(request):
 
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
-def save_search(request):
+def save_search(request,value):
   user_id=request.session.get('_auth_user_id')
-  if user_id == None:
-    return redirect('/')
-  if request.method=='POST':
-    u=request.user
-    save_search=request.POST.get('save_search')
-    save=SaveSearch(user=u,search_criteria=save_search)
+  s_search=SaveSearch.objects.filter(user = user_id)
+  word_have = False
+  for save in s_search:
+    if value.lower() == save.search_criteria or value.upper() == save.search_criteria or value.capitalize() == save.search_criteria :
+      word_have = True 
+      break
+  # print(request.user)  
+  if word_have == False:
+    save=SaveSearch(user=request.user,search_criteria=value)
     save.save()
-    return redirect('/dashboard_redirect/view')
-  return redirect('/dashboard_redirect/view')
+
+
+  s_search=SaveSearch.objects.filter(user = user_id)
+  saved = []
+  for save in s_search:
+    saved.append({"search_word" : save.search_criteria, "id": save.id})  
+  return JsonResponse({'status':"1", 'save':saved})
+  # if user_id == None:
+  #   return redirect('/')
+  # if request.method=='POST':
+  #   u=request.user
+  #   save_search=request.POST.get('save_search')
+  #   save=SaveSearch(user=u,search_criteria=save_search)
+  #   save.save()
+  #   return redirect('/dashboard_redirect/view')
+  # return redirect('/dashboard_redirect/view')
 
 
 
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
+def delete_search(request,id):
+  SaveSearch.objects.filter(id=id).first().delete()
+  user_id=request.session.get('_auth_user_id')
+  s_search=SaveSearch.objects.filter(user = user_id)
+  saved = []
+  for save in s_search:
+    saved.append({"search_word" : save.search_criteria, "id": save.id})
+  return JsonResponse({"status":"1",'save':saved})
+  
 
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['paid','Admin','SuperUser'])

@@ -1,0 +1,32 @@
+1) Commeted in settings line 126
+     "STATIC_ROOT"
+
+2) Uncommeted in settings line 133
+     "STATICFILES_DIRS"
+               now Images is working in Site
+
+
+
+Ask for Admin User Name And Passwd with Dashboard username and Password
+
+free user = test2141
+Passwd = testing@21
+
+
+superuser  = ankit_20
+Passwd = ankit_21
+
+
+superuser_2 = Superuser14
+passwd = ankit_user_14
+
+
+
+
+
+
+
+
+
+/Bugssssss
+Superuser cant login becuase he is not in UserData

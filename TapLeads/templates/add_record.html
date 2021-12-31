@@ -1,11 +1,14 @@
+{% extends 'base.html' %}
 
-<html>
-<head>
-    <link rel="stylesheet" href="static/css/dashboard.css">
-<link rel="stylesheet" href="static/css/add_record.css">
-</head>
-<body>
-  <input type="checkbox" id="nav-toggle">
+
+
+{% block css_links %}
+<link rel="stylesheet" href="/static/css/add_record.css">
+
+{% endblock css_links %}
+{#
+
+  <!-- <input type="checkbox" id="nav-toggle">
   <div class="sidebar">
       <div class="sidebar-brand">
         <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
@@ -28,7 +31,7 @@
           </li>
       </ul>
       </div>
-  </div>
+  </div> -->
   <main>
   <div class="main-content">
       <header>
@@ -45,9 +48,15 @@
           </div>
       </div>
       </header>
+
+      #}
+      {% block main_content %}
       <div class="projects">
           <div class="card">
               <div class="card-header">
+
+                
+
   <form action="" method='POST'>
     {% csrf_token %}
     <div class="card">
@@ -223,5 +232,5 @@
     </div>
   </form>
 </div>
-</body>
-</html>
+
+{% endblock main_content %}

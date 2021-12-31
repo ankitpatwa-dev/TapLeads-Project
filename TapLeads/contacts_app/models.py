@@ -51,6 +51,8 @@ class SaveSearch(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	search_criteria=models.CharField(max_length=200)
 
+	def __str__(self):
+		return f"{self.user} | {self.search_criteria}"
 
 
 class View(models.Model):

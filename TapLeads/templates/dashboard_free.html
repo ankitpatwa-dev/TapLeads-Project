@@ -1,9 +1,6 @@
-<html>
-<head>
-<link rel="stylesheet" href="static/css/dashboard.css">
-</head>
-<body>
-
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock title %}
+{#
     
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
@@ -53,6 +50,8 @@
          </div>
         </div>
       </header>
+#}
+{% block main_content %}
 
       <main>
         <div class="cards">
@@ -114,6 +113,5 @@
       </main>
     </div>
 
+    {% endblock main_content %}
 
-</body>
-</html>
