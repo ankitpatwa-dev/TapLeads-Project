@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}My contacts{% endblock title %}
+
+
+
+{% block css %}
+
+<style>
+
+.container {
+
+     overflow-x: auto;
+     overflow-y: auto;
+
+}
+
+</style>
+
+{% endblock css %}
+
+
+{% block main_content %}
+
+<div class=" py-5 my-5">
+<div class=" py-5 container card">
+
+     {% if data.exists %}
+
+
+     <table id="filter"  class="table">
+
+          <thead>
+               <tr>
+                    <th>First name</th>
+                    <th>Last Name</th>
+                    <th>Company</th>
+                    <th>Designation</th>
+                    <th>Emailid primary</th>
+                    <th>Phone</th>
+                    <th>Current location</th>
+                    <th>Degree</th>
+                    <th>Passing year</th>
+                    <th>Key skills</th>
+                    <th>Total Experience</th>
+                    <th>Notice Period</th>
+                    <th>Ctc</th>
+                    <th>Score</th>
+                    <th>Action</th>
+               </tr>
+          </thead>
+
+          {% for dat in data %}
+          <tbody>
+               <tr>
+                    <td class="first_name">{{dat.contact.first_name}}</td>
+                    <td class="last_name">{{dat.contact.last_name}}</td>
+                    <td class="contact_company">{{dat.contact.company}}</td>
+                    <td class="designation">{{dat.contact.designation}}</td>
+                    <td class="email">{{dat.contact.emailid_primary}}}</td>
+                    <td class="phone">{{dat.contact.phone}}</td>
+                    <td class="location">{{dat.contact.current_location}}</td>
+                    <td class="university">{{dat.contact.degree}}</td>
+          
+                    <td class="passing_year">{{dat.contact.passing_year}}</td>
+                    <td class="key_skills">{{dat.contact.key_skills}}</td>
+          
+                    <td class="total_exp">{{dat.contact.total_experience}}</td>
+		               <td class="notice-period">{{dat.contact.notice_period}}</td>
+               
+          
+                    <td class="contact_ctc">{{dat.contact.ctc}}</td>
+                    <td class="contact_score">{{dat.score}}</td>
+          
+                    <td><a href="#" class="btn btn-primary" onclick='paid()'>paid</a>
+                    </td>
+               </tr>
+          
+          
+          </tbody>
+     {% endfor %}
+          {% else %}
+          <div class="alert alert-success mx-4" role="alert">
+               Please Select some contacts
+             </div>
+
+     {% endif %}
+     </div>
+     </div>
+ 
+{% endblock main_content %}

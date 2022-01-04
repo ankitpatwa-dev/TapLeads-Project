@@ -50,13 +50,15 @@
   color: #fff;
   font-size: 1.1rem;
 
+}
 
-
+.sidebar-menu li a{
+  text-decoration: none;
 }
 
 
 #nav-toggle:checked + .sidebar {
-  width: 70px ;
+  width: 0px ;
 
 }
 #nav-toggle:checked + .sidebar .sidebar-brand,
@@ -88,12 +90,14 @@
 
 }
 #nav-toggle:checked ~ .main-content {
-  margin-left: 70px;
+  margin-left: 0px;
 
 }
 #nav-toggle:checked ~ .main-content  header{
-  width: calc(100% - 70px);
+  /* width: calc(100% - 0px); */
   left:70px;
+  width: 100%;
+  left:0px;
 
 }
 .main-content{

@@ -61,12 +61,18 @@ def registration(request):
 
       if form.is_valid():
         user = form.save()
+        # user.username = email
         name=request.POST.get('name')
-        email=request.POST.get('email')
+        # email=request.POST.get('email')
         phone_number=request.POST.get('phone_number')
         method=Method.objects.filter(type='predefined').first()
-        user_data = UserData(user=user, name=name, phone_number=phone_number, email=email, current_method=method)
+        user.first_name = name
+        # print(user.first_name)
+        user.email = user.username
+        user.is_active = False
+        user_data = UserData(user=user, name=name, phone_number=phone_number, email=user.email, current_method=method)
         user_data.save()
+        user.save()
         my_group = Group.objects.get(name='free')
         my_group.user_set.add(user)
         messages.success(request,"Registration successful!")
@@ -315,8 +321,8 @@ def dashboard_free(request):
   # give the user type
   group = request.user.groups.filter(user=request.user)[0]
   sub_type=str(group.name)
-
-  print(sub_type)
+  # print(request.user.first_name)
+  # print(sub_type)
   return render(request,'dashboard_free.html', {'users':users,
                                                 'username':request.user.username,
                                                 'date_joined':request.user.date_joined, 'sub_type' : sub_type
@@ -357,18 +363,17 @@ def dashboard_superuser(request):
   user_id=request.session.get('_auth_user_id')
   user_data=UserData.objects.get(user_id=user_id)
   scores=Score.objects.all()
-
-   # give the user type
+  # give the user type
   group = request.user.groups.filter(user=request.user)[0]
   sub_type=str(group.name)
   return render(request,'dashboard_superuser.html', {'user_data':user_data,
                                                      'scores':scores,
-                                                    'balance': user_data.total_limits - user_data.viewed,
+                                                      'balance': user_data.total_limits - user_data.viewed,
                                                     'date_joined':request.user.date_joined,
                                                     'sub_type' : sub_type})
 
 
-
+@login_required(login_url="login")
 def dashboard_redirect(request):
   user_id=request.session.get('_auth_user_id')
   group = request.user.groups.filter(user=request.user)[0]
@@ -409,6 +414,23 @@ def record_show(request):
 
 
 
+
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['paid','free'])
+def bought_records(request):
+  user_id=request.session.get('_auth_user_id')
+  data = View.objects.filter(user = request.user)
+  # if data.exists():
+  #   print(data)
+  # else:
+  #   print('ok')  
+  print(data)
+  return render(request, 'bought_records.html', {'data' : data})
+
+
+
+
+
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
 def save_search(request,value):
@@ -430,32 +452,28 @@ def save_search(request,value):
   for save in s_search:
     saved.append({"search_word" : save.search_criteria, "id": save.id})  
   return JsonResponse({'status':"1", 'save':saved})
-  # if user_id == None:
-  #   return redirect('/')
-  # if request.method=='POST':
-  #   u=request.user
-  #   save_search=request.POST.get('save_search')
-  #   save=SaveSearch(user=u,search_criteria=save_search)
-  #   save.save()
-  #   return redirect('/dashboard_redirect/view')
-  # return redirect('/dashboard_redirect/view')
+  
 
 
 
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
 def delete_search(request,id):
-  SaveSearch.objects.filter(id=id).first().delete()
+  delete_word =SaveSearch.objects.filter(id=id).first()
+  if(delete_word.user == request.user):
+    SaveSearch.objects.filter(id=id).first().delete()
+  else:
+    return JsonResponse({"status":"1",'msg':'this is different account'}) 
   user_id=request.session.get('_auth_user_id')
   s_search=SaveSearch.objects.filter(user = user_id)
   saved = []
   for save in s_search:
     saved.append({"search_word" : save.search_criteria, "id": save.id})
-  return JsonResponse({"status":"1",'save':saved})
+  return JsonResponse({"status":"1",'save':saved,'msg':'this is different account'})
   
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['paid','Admin','SuperUser'])
+@allowed_users(allowed_roles=['paid','SuperUser'])
 def Export(request):
   user=request.session.get('_auth_user_id')
   ids=[]
@@ -487,7 +505,7 @@ def Export(request):
 
 
 @login_required(login_url="login")
-@allowed_users(allowed_roles=['SuperUser'])
+@allowed_users(allowed_roles=['SuperUser','paid'])
 def limit_data(request, id):
   user = request.user
   user_data=UserData.objects.get(user_id=user.id)

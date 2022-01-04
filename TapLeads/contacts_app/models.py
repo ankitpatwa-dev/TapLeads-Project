@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#user type [admin,subscriber]
-#Subscription_type [free,paid,system]
+
 
 class Contact(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -45,6 +44,8 @@ class Contact(models.Model):
 	notes=models.CharField(max_length=200, null=True)
 	remarks=models.CharField(max_length=200, null=True)
 	status=models.CharField(max_length=200, null=True)
+	notice_period=models.CharField(max_length=200, null=True)
+
 
 
 class SaveSearch(models.Model):

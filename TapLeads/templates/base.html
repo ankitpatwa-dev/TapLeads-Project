@@ -20,16 +20,18 @@
 
 
 {% endblock css %}
+
+
 </head>
 <body>
 
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
-        <div class="sidebar-brand">
-          <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
-          </h1>
-        </div>
+      <div class="sidebar-brand">
+        <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
+        </h1>
+      </div>
 
         <div class="sidebar-menu">
           <ul>
@@ -59,15 +61,32 @@
                 <span>Add Records Manually</span>
               </a>
             </li>
+            {% endif %} 
             <li>
-         {% endif %} 
               <a href="/dashboard_redirect/view" {% if request.path ==  '/dashboard_redirect/view' %}  class="active"  
               {% endif %}>
                 <span class="fas fa-users" ></span>
                 <span>View Contacts </span>
               </a>
             </li>
+        {%  if sub_type == "paid" %} 
             <li>
+              <a href="/dashboard_redirect/boughts" {% if request.path ==  '/dashboard_redirect/boughts' %}  class="active"  
+              {% endif %}>
+                <span class="fas fa-users" ></span>
+                <span>My Contacts</span>
+              </a>
+            </li>
+            {% endif %}
+        {%  if sub_type != "Admin" and sub_type != "free" %} 
+            <li>
+  						<!-- <a href="Export"> -->
+  						<a href="/dashboard_redirect/Export">
+                <span class="fas fa-users" ></span>
+                <span>Export Contacts</span>
+              </a>
+            </li>
+          {% endif %}  
             <li>
               <a href="/logout">
                 <span class="fas fa-tasks"></span>
@@ -91,7 +110,7 @@
 
         <div class="user-wrapper">
          <div class="">
-            <h4>{{ request.user }}</h4>
+            <h4>{{ request.user.first_name }}</h4>
 
 
          </div>

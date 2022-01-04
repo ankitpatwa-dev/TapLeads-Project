@@ -19,6 +19,7 @@ urlpatterns = [
     path('dashboard_redirect/importrecord',views.import_record,name="file"),
     path('dashboard_redirect/importrecord/import',views.import_contacts,name="import_contacts"),
     path('dashboard_redirect/view',views.record_show,name="data"),
+    path('dashboard_redirect/boughts',views.bought_records,name="data"),
     path('dashboard_redirect/view/viewed/<id>',views.limit_data,name="data"),
     path('dashboard_paid/view/viewed/<id>',views.limit_data,name="data"),
     path('dashboard_superuser/view/viewed/<id>',views.limit_data,name="data"),
