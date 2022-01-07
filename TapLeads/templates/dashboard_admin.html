@@ -94,7 +94,7 @@
               <span class="fas fa-clipboard-list"></span>
             </div>
           </div>
-          <div class="card-single">
+          <!-- <div class="card-single">
             <div>
               <h2> Scoring type </h2>
               <button><a href = "/set_score"><span class="card-single button">Edit</span> </a></button>
@@ -102,11 +102,11 @@
             <div>
               <span class="fas fa-shopping-cart"></span>
             </div>
-          </div>
+          </div> -->
           <div class="card-single">
             <div>
               <h1>{{ user.groups.all.0 }} Subscriber</h1>
-              <span>Member since : {{ date_joined }}</span>
+              <span>Member since : {{ date_joined.date }}</span>
             </div>
             <div>
               <span class="fas fa-wallet"></span>

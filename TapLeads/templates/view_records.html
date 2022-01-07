@@ -4,19 +4,64 @@
 
 
 
+{% block css_links %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+{% endblock css_links %}
+
 {% block css %}
 <style>
 	section {
 		background-color: #ffe4c4;
 	}
-
-	.container {
+/*
+	.container-scroll {
 
 		overflow-x: scroll;
 		overflow-y: scroll;
+		width: 100%;
 
-	}
+	} */
+	.container-scroll {
+		
+		table-layout: fixed;
+		border-collapse: collapse; 
+		overflow-x: scroll;
+		width: 100%;
+	   }
+	   /*
+		.container-scroll table{
+			display: block;
+			width: 1000px;
+			overflow: auto;		
+		}
+		.container-scroll table tbody{
+			display: block;
+			width: 800px;
+			
+			height: 500px;
+	   }
+	   .container-scroll thead tr {
+		display: block;
+		
+	   }
+	   .container-scroll th,
+	   .container-scroll  td {
+		padding: 5px 10px;
+		
+	   }
 
+	/*
+	tbody.scroll{
+	overflow-x: scroll;
+		overflow-y: scroll; 
+		color: #ffe4c4;
+		overflow-x: scroll  ; 
+		overflow-y: scroll  ; 
+	} */
 	#history {
 		background-color: #FAEBD7;
 		width: 40%;
@@ -97,6 +142,7 @@
           <div>          
                <h2 style="font-size: 20px; padding: 1rem;">Recent Searches</h2>
                <ul class="" id="ul">
+				
                     {% for search in save %}
                          <li class="search_saves"> <span class="search_text" onclick="search_again(this)">{{search.search_criteria}} </span> <button onclick="delete_search(this)" class="delete_search" id="{{search.id}}">&#10006;</button> |</li>
                     {% endfor %}
@@ -104,8 +150,7 @@
           </div>
 
 		<div>
-	<button id="display_filter" class="btn btn-primary">show filter</button>
-     <div class="form-inline float-right">
+     <div class="form-inline float-left">
 
           <input class="form-control mr-sm-2" id="search" type="search"
                placeholder="Search">
@@ -113,59 +158,53 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
                id="submit"><i class="fas fa-search">save search</i></button>
      </div>
+	
+	<button id="display_filter" class="btn btn-primary my-2 float-right">show filter</button>
+	<select name="backdrop" id="rows-update" class="mx-4 my-2 p-2 primary float-right"  onchange="Rowchange(this)">
+		<option value="3" selected >3</option>
+		<option value="5" >5</option>
+		<option value="10" >10</option>
+		<option value="25">25</option>
+		<option value="50">50</option>
+		<option value="100">100</option>
+	 </select>
+	
+
 </div>
 	<div class="card-body" id='showfilter'>
 
 	<div style="margin-bottom: 20px; padding:10px;" class="filter">
           <hr>
 <p>Filter Data From Here</p>
-<!-- <input type="hidden" id="filter0" placeholder="Filter By full name"> -->
+
 <input type="text" id="filter0" placeholder="Filter By first name">
-<!-- <input type="text" id="filter2" placeholder="Filter By middle name"> -->
+
 <input type="text" id="filter1" placeholder="Filter By lastname">
 <input type="text" id="filter2" placeholder="Filter By company">
 <input type="text" id="filter3" placeholder="Filter By designation">
 <input type="hidden" id="filter4" placeholder="Filter By emailid_primary">
-<!-- <input type="hidden" id="filter7"
-	placeholder="Filter By emailid_secondary"> -->
-<!-- <input type="hidden" id="filter8" placeholder="Filter By aadhar"> -->
-<!-- <input type="hidden" id="filter9" placeholder="Filter By pan_card"> -->
+
 <input type="hidden" id="filter5" placeholder="Filter By phone">
 <input type="text" id="filter6" placeholder="Filter By current_location">
-<!-- <input type="text" id="filter12"
-	placeholder="Filter By preferred_location"> -->
-<!-- <input type="text" id="filter13" placeholder="Filter By gender"> -->
-<!-- <input type="text" id="filter14" placeholder="Filter By title"> -->
-<!-- <input type="text" id="filter15" placeholder="Filter By department"> -->
-<!-- <input type="text" id="filter16" placeholder="Filter By university"> -->
+
 <input type="text" id="filter7" placeholder="Filter By degree">
 <input type="text" id="filter8" placeholder="Filter By passing_year">
-<!-- <input type="text" id="filter19" placeholder="Filter By college"> -->
-<!-- <input type="hidden" id="filter20" placeholder="Filter By linkedin"> -->
-<!-- <input type="hidden" id="filter21" placeholder="Filter By facebook"> -->
-<!-- <input type="hidden" id="filter22" placeholder="Filter By instagram"> -->
-<!-- <input type="text" id="filter23" placeholder="Filter By industry"> -->
-<!-- <input type="text" id="filter24" placeholder="Filter By country"> -->
-<!-- <input type="text" id="filter25" placeholder="Filter By pin_code"> -->
+
 <input type="text" id="filter9" placeholder="Filter By Key Skills">
-<input type="text" id="filter10" placeholder="Filter By Total experience">
-<!-- <input type="text" id="filter28" placeholder="Filter By years_in_business"> -->
-<!-- <input type="text" id="filter29" placeholder="Filter By CIN no"> -->
-<!-- <input type="text" id="filter30" placeholder="Filter By turnover"> -->
-<!-- <input type="text" id="filter31"
-	placeholder="Filter By date_of_incorporation"> -->
-<!-- <input type="text" id="filter32" placeholder="Filter By employees"> -->
-<input type="text" id="filter11" placeholder="Filter By notice period">
-<input type="text" id="filter12" placeholder="Filter By ctc">
-<input type="hidden" id="filter13" placeholder="Filter By score">
+<input type="text" id="filter10" placeholder="Filter By Key Skills secondary">
+<input type="text" id="filter11" placeholder="Filter By Total experience">
+
+<input type="text" id="filter12" placeholder="Filter By notice period">
+<input type="text" id="filter13" placeholder="Filter By ctc">
 <input type="hidden" id="filter14" placeholder="Filter By score">
+<input type="hidden" id="filter15" placeholder="Filter By score">
 <br>
 <button type="button" id="reset_table" class="btn btn-primary">Reset</button>
 </div>
 
 </div>
 
-<div class="container">
+<div class="container container-scroll">
 
 <table id="filter"  class="table">
 
@@ -175,12 +214,13 @@
 		<th>Last Name</th>
 		<th>Company</th>
 		<th>Designation</th>
-		<th>Emailid primary</th>
+		<th>Emailid</th>
 		<th>Phone</th>
 		<th>Current location</th>
 		<th>Degree</th>
 		<th>Passing year</th>
 		<th>Key skills</th>
+		<th>Key skills Secondary</th>
 		<th>Total Experience</th>
 		<th>Notice Period</th>
 		<th>Ctc</th>
@@ -192,16 +232,20 @@
 </thead>
 {% if sub_type == 'free' or sub_type == 'paid' %}
 
+<tbody class="scroll">
 {% for contact in contacts %}
-<tbody>
+	{% if not contact.is_viewed %}
 	<tr>
+
 		<td class="first_name">{{contact.contact.first_name}}</td>
 		<td class="last_name">{{contact.contact.last_name}}</td>
 		<td class="contact_company">{{contact.contact.company}}</td>
 		<td class="designation">{{contact.contact.designation}}</td>
 		{% if contact.is_viewed %}
 
-		<td class="email">{{contact.contact.emailid_primary}}</td>
+		<td class="email">{{contact.contact.emailid_primary}} <hr> {{contact.contact.emailid_secondary}}
+		
+		</td>
 		<td  class="phone">{{contact.contact.phone}}</td>
 
 		{% else %}
@@ -213,6 +257,7 @@
 
 		<td class="passing_year">{{contact.contact.passing_year}}</td>
 		<td class="key_skills">{{contact.contact.key_skills}}</td>
+		<td class="key_skills">{{contact.contact.key_skills_secondary}}</td>
 
 		<td class="total_exp">{{contact.contact.total_experience}}</td>
 
@@ -222,18 +267,29 @@
 		<td class="contact_ctc">{{contact.contact.ctc}}</td>
 		<td class="contact_score">{{contact.score}}</td>
 
+		{% if limites == 0 or limites == none %}
+
 		<td><a href="#" class="btn btn-primary" onclick='paid()'>paid</a>
 		</td>
+
+		{% else %}
+		{% if contact.is_viewed %}
+		<td><button type="button" class="btn btn-primary btn-disabled"
+				disabled>Viewed</button></td>
+		{% else %}
+		<td><a href="view/viewed/{{contact.contact.id}}"
+				class="btn btn-primary">View</a></td>
+		{% endif %}
+		{% endif %}
 	</tr>
-
-
+	{% endif %}
+	{% endfor %}
 </tbody>
-{% endfor %}
 
 
 {% elif sub_type == 'Admin' or sub_type == 'SuperUser' %}
 
-<tbody>
+<tbody class="scroll">
 {% for contact in contacts %}
 	<tr>
 
@@ -241,7 +297,7 @@
 		<td  class="last_name">{{contact.contact.last_name}}</td>
 		<td class="contact_company">{{contact.contact.company}}</td>
 		<td class="designation">{{contact.contact.designation}}</td>
-		<td class="email">{{contact.contact.emailid_primary}}</td>
+		<td class="email">{{contact.contact.emailid_primary}} <hr> {{contact.contact.emailid_secondary}}</td>
 		<td  class="phone">{{contact.contact.phone}}</td>
 
 		<td class="location">{{contact.contact.current_location}}</td>
@@ -249,6 +305,7 @@
 		<td class="passing_year">{{contact.contact.passing_year}}</td>
 
 		<td class="key_skills">{{contact.contact.key_skills}}</td>
+		<td class="key_skills">{{contact.contact.key_skills_secondary}}</td>
 
 		<td class="total_exp">{{contact.contact.total_experience}}</td>
 		
@@ -310,26 +367,61 @@
 		const display_filter = document.getElementById('display_filter');
 		const showFilter = document.getElementById("showfilter");
 		const reset_btn = document.getElementById('reset_table');
+		const all_tds = document.querySelectorAll('tbody tr');
+		const rows_update = document.getElementById('rows-update');
 
-		reset_btn.addEventListener('click', function(){
+		//console.log(all_tds)
+
+		reset_btn.addEventListener('click', call_pagination);
+
+		function reset_fun(){
 			let pager = new Pager('filter', 10);
           	pager.init();
           	pager.showPageNav('pager', 'pageNavPosition');
           	pager.showPage(1);
 			return;
-		});
+		}			
 
 
 		function search_again(current) {
 			const value = current.innerText;
 			searchBar.value = value;
-			myFunction();
+			filterList();
 		
 		}
 
-		searchBar.addEventListener('input', myFunction);
+		function Rowchange(val){
+			let pager = new Pager('filter', parseInt(val.value));
+          	pager.init();
+          	pager.showPageNav('pager', 'pageNavPosition');
+          	pager.showPage(1);
+			console.log(val.value)
+			//return;
+		}
 
-          
+
+searchBar.addEventListener('input', filterList);
+function filterList() {
+    var val = searchBar.value.toLowerCase();
+    var valArr = val.split(' ');
+    var tbl = document.getElementById('filter');
+    var tblLength = tbl.rows.length;
+    console.log(tblLength)
+    if (tblLength != 0) {
+        for (var i = 1; i < tblLength; i++) {
+            tbl.rows[i].style.display = '';
+            for (var j = 0; j < valArr.length; j++) {
+                if (tbl.rows[i].textContent.toLowerCase().indexOf(valArr[j]) === -1) {
+                    tbl.rows[i].style.display = 'none';
+                }
+            }
+        }
+    }
+    if(val == ""){
+	call_pagination()
+	return
+    }
+}     
 		showFilter.style.display = 'none';
 
 		display_filter.addEventListener('click', () => {
@@ -386,7 +478,7 @@ const oTableFilter = function () { var e, t = document.getElementsByTagName("tab
 
 
 
-
+	//searchBar.addEventListener('input', myFunction); 
 
 		/*Serching*/
 		function myFunction() {
@@ -440,15 +532,16 @@ const oTableFilter = function () { var e, t = document.getElementsByTagName("tab
 				}
 			}
 		})
-		//function call_pagination(){
-          let pager = new Pager('filter', 10);
+		function call_pagination(){
+
+          let pager = new Pager('filter', parseInt(rows_update.value));
 
           pager.init();
           pager.showPageNav('pager', 'pageNavPosition');
           pager.showPage(1);
-		//}
+		}
 
-	//	call_pagination();
+	  call_pagination();
 
           // Table Pagination
           function Pager(tableName, itemsPerPage) {

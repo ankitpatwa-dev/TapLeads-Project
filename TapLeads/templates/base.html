@@ -4,9 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
 
 <!-- custom Css -->
 
@@ -15,7 +13,7 @@
 {% endblock css_links %}
 
 <link rel="stylesheet" href="/static/css/dashboard.css">
-<title>TapLeads| {% block title %} {% endblock title %} </title>
+<title>TapLeads | {% block title %} {% endblock title %} </title>
 {% block css %}
 
 
@@ -88,6 +86,20 @@
             </li>
           {% endif %}  
             <li>
+              <a href="/set_score" {% if request.path ==  '/set_score' %}  class="active"  
+              {% endif %}>
+                <span class="fas fa-tasks"></span>
+                <span>Create Method</span>
+              </a>
+            </li>
+            <li>
+              <a href="/Available_methods" {% if request.path ==  '/Available_methods' %}  class="active"  
+              {% endif %}>
+                <span class="fas fa-tasks"></span>
+                <span>Set Score</span>
+              </a>
+            </li>
+            <li>
               <a href="/logout">
                 <span class="fas fa-tasks"></span>
                 <span>Logout</span>
@@ -120,7 +132,15 @@
 {% block main_content %}
       
 {% endblock main_content %}
-      
+
+
+{% block last_ten_views %}
+
+  
+{% endblock last_ten_views %}
+
+
+
      <script>
 
 

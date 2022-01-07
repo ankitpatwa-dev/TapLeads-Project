@@ -28,6 +28,7 @@ urlpatterns = [
     path('delete_search/<id>',views.delete_search,name="delete_search"),
     path('set_limits',views.set_limits,name="set_limits"),
     path('set_score',views.set_score,name="set_score"),
+    path('Available_methods',views.available_methods,name="Available_methods"),
     path('set_score/select',views.select,name="select"),
     path('recalculate_score',views.recalculate_score,name="recalculate_score"),
     path('Ourteams',views.ourteams,name="ourteams"),

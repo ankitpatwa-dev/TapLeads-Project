@@ -43,6 +43,7 @@
 
 
           <div class="navbutton">
+            <a href="./Ourteams" style=" link-style:none; text-decoration:none;"> <button class="btn btn-outline-success mx-2"> Our Teams</button> </a>
 
             {% if request.user.is_authenticated %}
             <a href="/dashboard_redirect" style=" link-style:none; text-decoration:none;"><button class="btn btn-outline-info mx-2">Dashboard</button></a>
@@ -50,7 +51,6 @@
             <a href="/logout" style=" link-style:none; text-decoration:none;"><button class="btn btn-outline-danger mx-2">Logout </button></a>
 
             {% else %}
-            <a href="./Ourteams" style=" link-style:none; text-decoration:none;"> <button class="btn btn-outline-success mx-2"> Our Teams</button> </a>
 
             <a href="login" style=" link-style:none; text-decoration:none;"><button class="btn btn-outline-success mx-2" >Login </button> </a>
             <a href="registration " style=" link-style:none; text-decoration:none;"><button class="btn btn-outline-success mx-2">Registration </button></a>

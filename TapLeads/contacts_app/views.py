@@ -1,3 +1,4 @@
+from django.db.models.query import RawQuerySet
 from django.http.response import JsonResponse
 from django.shortcuts import render,redirect,HttpResponse
 from contacts_app.decorators import unauthenticated_user
@@ -321,12 +322,15 @@ def dashboard_free(request):
   # give the user type
   group = request.user.groups.filter(user=request.user)[0]
   sub_type=str(group.name)
-  # print(request.user.first_name)
-  # print(sub_type)
+  # last 10 viewed contacts
+  views = View.objects.filter(user= request.user)
+  if views is not None:
+    last_views = [i for i in views][-1:-11:-1]
   return render(request,'dashboard_free.html', {'users':users,
                                                 'username':request.user.username,
-                                                'date_joined':request.user.date_joined, 'sub_type' : sub_type
-                                                })
+                                                'date_joined':request.user.date_joined, 'sub_type' : sub_type, 'last_view':last_views})
+
+
 
 
 @login_required(login_url="login")
@@ -334,12 +338,16 @@ def dashboard_free(request):
 def dashboard_paid(request):
   user_id=request.session.get('_auth_user_id')
   user_data=UserData.objects.get(user_id=user_id)
-  # give the user type
+  # last 10 viewed contacts
+  views = View.objects.filter(user= request.user)
+  if views is not None:
+    last_views = [i for i in views][-1:-11:-1]      
+  
   group = request.user.groups.filter(user=request.user)[0]
   sub_type=str(group.name)
   return render(request,'dashboard_paid.html', {'user_data':user_data,
                                                 'balance': user_data.total_limits - user_data.viewed,
-                                                'date_joined':request.user.date_joined,'sub_type' : sub_type})
+                                                'date_joined':request.user.date_joined,'sub_type' : sub_type, 'last_view':last_views})
 
 
 @login_required(login_url="login")
@@ -400,6 +408,9 @@ def record_show(request):
   sub_type=str(group.name)
   viewed=View.objects.filter(user=request.user)
   scores=Score.objects.filter(user=request.user)
+  limites = UserData.objects.filter(user = request.user).first().total_limits
+  # print(limites)
+  # limite = limites.total_limits
   contacts = []
   for contact in Contact.objects.all():
         is_viewed = len(viewed.filter(contact_id=contact.id)) != 0
@@ -410,7 +421,7 @@ def record_show(request):
               score = 0
         contacts.append({'is_viewed': is_viewed, 'contact': contact, 'score': score})
         logger.debug(contact.full_name)
-  return render(request,'view_records.html',{'contacts': contacts,'sub_type':sub_type,'save':s_search})
+  return render(request,'view_records.html',{'contacts': contacts,'sub_type':sub_type,'save':s_search,'limites':limites})
 
 
 
@@ -558,6 +569,17 @@ def set_score(request):
                 }
   )
 
+@login_required(login_url="login")
+@allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
+def available_methods(request):
+  user_data = UserData.objects.get(user=request.user)
+  methods = Method.objects.filter(Q(owner_id=None) | Q(owner_id=request.user.id))
+  return render(request,"Available_methods.html",{
+                  'current_method': user_data.current_method,
+                  'methods': serializers.serialize('json', methods)
+                }
+  )
+
 
 @login_required(login_url="login")
 @allowed_users(allowed_roles=['free','paid','Admin','SuperUser'])
@@ -568,7 +590,7 @@ def select(request):
             user_data.current_method_id = method
             user_data.save()
             async_task(recalculate, request.user.id)
-      return redirect('/set_score')
+      return redirect('/Available_methods')
 
 
 

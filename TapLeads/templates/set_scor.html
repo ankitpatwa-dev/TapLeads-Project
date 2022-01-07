@@ -1,25 +1,83 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/css/dashboard.css">
 
-{% extends 'base.html' %}
-{% block title %} Set Score {% endblock title %}
+    </head>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+              <h1> <span class="fab fa-asymmetrik"> </span> <span>TapLeads</span>
+              </h1>
+            </div>
 
-{% block css_links %}
-<link rel="stylesheet" href="static/css/dashboard.css">
-{% endblock css_links %}
+            <div class="sidebar-menu">
+              <ul>
+                <li>
+                  <a href="/dashboard_redirect" >
+                    <span class="fas fa-tachometer-alt"></span>
+                    <span>Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="dashboard_redirect/view">
+                    <span class="fas fa-users" ></span>
+                    <span>View Contacts</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="logout">
+                    <span class="fas fa-tasks"></span>
+                    <span>Logout</span>
+                  </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <main>
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                    <span class="fas fa-bars">=</span>
+                    </label>
+                    Scoring
+                </h2>
 
-{% block css %}
-    <style>
-        .main-margin{
-            margin-top: 6rem;
-        }
-    </style>
-
-{% endblock css %}
-
-{% block main_content %}
-
-           
-            
-            <div class="projects main-margin"><center>
+                <div class="user-wrapper">
+                    <div class="">
+                        <h4>{{ request.user }}</h4>
+                    </div>
+                </div>
+            </header>
+            <div class="projects">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Available methods</h4>
+                    </div>
+                    <br>
+                    <div class="card-body"><center>
+                        <form action="/set_score/select" method='POST'>
+                            {% csrf_token %}
+                            <div class="input-group input-group-icon">
+                                <label for="method">Choose a Scoring Type:</label>
+                                    <select name="method" id="method">
+                                    </select>
+                                </label>
+                            </div>
+                            <br>
+                            <center><input type='submit' placeholder="Submit" class="fas fa-arrow-right"> </center>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </center>
+            </div>
+            <br>
+            <center><h4>Or..</h4></center>
+            <br>
+            <div class="projects"><center>
                 <div class="card">
                     <div class="card-header">
                         <h4>Create a new scoring method</h4>
@@ -48,10 +106,18 @@
                 </div></center>
             </div>
             <br><br>
-         
+            <div class="projects2"><center>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Available methods' details</h4>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                    </div>
+                </div></center>
+            </div>
         </div>
         </main>
-
         <script type="text/javascript">
             const fields = {
                 "full_name": "Full Name",
@@ -92,10 +158,9 @@
                 "notes": "Notes",
                 "remarks": "Remarks",
             }
-           /* 
             const selectedMethod = "{{current_method.id|safe}}"
             const existingMethods  = {{ methods|safe }};
-          const appendMethod = (method, dropdown) => {
+            const appendMethod = (method, dropdown) => {
                 const newOption = document.createElement('option');
                 const optionText = document.createTextNode(method.fields.name);
                 newOption.appendChild(optionText);
@@ -106,8 +171,7 @@
             const existingMethodDropdown = document.getElementById("method")
             existingMethods.forEach((method) => {
                 appendMethod(method, existingMethodDropdown);
-            }) 
-            */
+            })
             const fieldDiv = document.getElementById("fields")
             const fieldDropdown = document.createElement('select')
             Object.entries(fields).forEach(([field, value]) => {
@@ -117,7 +181,6 @@
                 newOption.setAttribute('value', field);
                 fieldDropdown.appendChild(newOption);
             })
-          
             function parseInputs(data) {
                 var ret = {};
             retloop:
@@ -203,6 +266,6 @@
                 })
             }
         </script>
-{% endblock main_content %}
-
+    </body>
+</html>
 

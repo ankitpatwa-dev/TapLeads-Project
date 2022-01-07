@@ -17,42 +17,39 @@
 
 {% block main_content %}
 
-           
-            
-            <div class="projects main-margin"><center>
+            <div class="projects main-margin">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Create a new scoring method</h4>
+                        <h4>Available methods</h4>
                     </div>
                     <br>
-                    <div class="card-body">
-                        <form action="" id="new-method-form" method='POST'>
+                    <div class="card-body"><center>
+                        <form action="/set_score/select" method='POST'>
                             {% csrf_token %}
                             <div class="input-group input-group-icon">
-                                <label for="name">Method Name:</label>
-                                    <input type="text" name="name" />
-                                </label>
-                                <br><br>
-                                <label for="fields">Fields</label>
-                                    <div id="fields"></div>
-                                        <button type="button" onclick="addField()">Add new field</button>
-                                    </div>
+                                <label for="method">Choose a Scoring Type:</label>
+                                    <select name="method" id="method">
+                                    </select>
                                 </label>
                             </div>
+                            <br>
+                            <center><input type='submit' placeholder="Submit" class="fas fa-arrow-right"> </center>
                         </form>
-                        <br><br>
-
-                        <div id="total">Please make sure the total weightage adds up to 100</div>
-                        <center><button type='button' onclick="onSubmit()" class="fas fa-arrow-right">Submit</button></center>
                     </div>
-                </div></center>
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </center>
             </div>
-            <br><br>
-         
+            <br>
+           
+           
+           
         </div>
         </main>
 
         <script type="text/javascript">
+            /*
             const fields = {
                 "full_name": "Full Name",
                 "first_name": "First Name",
@@ -91,11 +88,10 @@
                 "ctc": "CTC",
                 "notes": "Notes",
                 "remarks": "Remarks",
-            }
-           /* 
+            } */
             const selectedMethod = "{{current_method.id|safe}}"
             const existingMethods  = {{ methods|safe }};
-          const appendMethod = (method, dropdown) => {
+            const appendMethod = (method, dropdown) => {
                 const newOption = document.createElement('option');
                 const optionText = document.createTextNode(method.fields.name);
                 newOption.appendChild(optionText);
@@ -106,8 +102,9 @@
             const existingMethodDropdown = document.getElementById("method")
             existingMethods.forEach((method) => {
                 appendMethod(method, existingMethodDropdown);
-            }) 
-            */
+            })
+
+             /*
             const fieldDiv = document.getElementById("fields")
             const fieldDropdown = document.createElement('select')
             Object.entries(fields).forEach(([field, value]) => {
@@ -117,7 +114,7 @@
                 newOption.setAttribute('value', field);
                 fieldDropdown.appendChild(newOption);
             })
-          
+            /*
             function parseInputs(data) {
                 var ret = {};
             retloop:
@@ -202,7 +199,8 @@
                     window.location.reload()
                 })
             }
-        </script>
+            */
+        </script> 
 {% endblock main_content %}
 
 
